@@ -32,19 +32,19 @@ def send_telegram_message(message):
     requests.post(url, json=payload)
 
 def main():
-    previous_data = ''
+    previous_data = 'test'
     
     while True:
         try:
             current_data = fetch_api_data()
             
             if previous_data is not None and current_data != previous_data:
-                message = f"Username: Intraday ke Ch***\n{current_data}"
+                message = f"Username: Intraday ke Ch***\n\nCurrent:\n{current_data}\nPrevious:\n{previous_data}"
                 send_telegram_message(message)
             
             previous_data = current_data
             
-            time.sleep(60)  # Wait for 1 minute
+            time.sleep(30)  # Wait for 1 minute
         except Exception as e:
             error_message = f"An error occurred: {str(e)}"
             send_telegram_message(error_message)
